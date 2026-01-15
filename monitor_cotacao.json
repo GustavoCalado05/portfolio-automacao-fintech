@@ -1,0 +1,140 @@
+{
+  "name": "monitor-cotacao",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d7b07f8b-21f6-46ba-89d5-ead3dd3b7f6d",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        540,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://economia.awesomeapi.com.br/last/USD-BRL",
+        "options": {}
+      },
+      "id": "53123a59-045c-4da6-b5d4-a5ca44553fa4",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "99840fb7-5224-4a3c-80e4-18ea771e0d82",
+              "leftValue": "={{ $json.USDBRL.high }}",
+              "rightValue": 5,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "9bbf95f7-ab83-46f3-b39b-8983faca6b47",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        980,
+        200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "58a20e62-4695-4142-9c3c-ff92fe4a01cf",
+      "name": "Enviar E-mail Alerta",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        80
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "45619bef-ffe0-4a93-92e3-bfd3d723d10d",
+      "name": "Tudo normal",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        220
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Enviar E-mail Alerta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tudo normal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e46b5a01-0cc8-4509-b244-a59071ebebc8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6d0b76c14990e33bfe517d88556fa4a0e6ad87988944a03f251e7a03929a051"
+  },
+  "id": "TScRMyl7O2j6I2KI",
+  "tags": []
+}

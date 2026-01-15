@@ -1,0 +1,99 @@
+{
+  "name": "validar-cpf",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "79d4ce2f-d5d5-43fa-9861-9596f48a6535",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        540,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst cpfRecebido = '12345678909'; \n\n\nlet status = 'Inválido';\nif (cpfRecebido.length === 11) {\n  status = 'Válido';\n}\n\n\nreturn {\n  json: {\n    cpf: cpfRecebido,\n    resultado: status,\n    data_validacao: new Date()\n  }\n};"
+      },
+      "id": "e90ebdfa-8457-46e0-8e06-f29676a5e006",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9a3629f3-d977-475a-afcd-b74a2eceab78",
+              "leftValue": "={{ $json.resultado }}",
+              "rightValue": "Válido",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "71658ad0-ac3b-4d7a-9ef4-af78b4c8b5e3",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        980,
+        200
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8827615a-9fe9-4ed7-929c-470f9d86a0fd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6d0b76c14990e33bfe517d88556fa4a0e6ad87988944a03f251e7a03929a051"
+  },
+  "id": "neKKkS8zHqTdCVPk",
+  "tags": []
+}

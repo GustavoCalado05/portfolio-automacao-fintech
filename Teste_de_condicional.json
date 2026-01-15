@@ -1,0 +1,119 @@
+{
+  "name": "Teste_de_condicional",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "8767812c-141f-45e0-a749-f875a92fac4a",
+        "options": {}
+      },
+      "id": "bf1a9b16-bdf0-4c9f-8103-1ab9fcf735b0",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        540,
+        200
+      ],
+      "webhookId": "8767812c-141f-45e0-a749-f875a92fac4a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f3c7b58-b12e-4c37-9607-00124125c9d6",
+              "leftValue": 1000,
+              "rightValue": 500,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "74aa90fd-06fd-4385-9b49-d8f2d797cd0c",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        760,
+        200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0b23a9ca-b8b7-4595-9d8b-e08513c2c1d5",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        160
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "b5e5915d-4633-4404-8e5d-a8c3b153941e",
+      "name": "No Operation, do nothing1",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        960,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "cc579cdc-a362-4913-aa5c-d69f426354fd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6d0b76c14990e33bfe517d88556fa4a0e6ad87988944a03f251e7a03929a051"
+  },
+  "id": "LVYjw0LX6486BiRu",
+  "tags": []
+}
