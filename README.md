@@ -19,11 +19,11 @@ O objetivo destes fluxos é apresentar soluções escaláveis para problemas com
 Simulação de um backend utilizando condicioanal IF via **Webhook**, aplica regras de negócio para categorizar clientes (VIP vs. Varejo) com base no volume financeiro e direciona os dados para o banco de dados correto (SQL) ou para arquivamento.
 * **Competências:** Webhooks, Roteamento de Dados, Estrutura de Decisão.
 
-### 2. [Scripting] Validador de CPF via Código (`validador-cpf-script.json`)
+### 2. [Scripting] Validador de CPF via Código (`validar_cpf.json`)
 Módulo de validação cadastral que utiliza o **Node Code** do n8n. Em vez de depender de componentes prontos, desenvolvi um script em **JavaScript** que recebe o input, verifica a integridade do dado (quantidade de dígitos e formatação) e retorna o status de validade para o fluxo.
 * **Competências:** JavaScript, Manipulação de Strings, Lógica de Programação.
 
-### 3. [Integração] Monitor de Cotação em Tempo Real (`monitor-cotacao-api.json`)
+### 3. [Integração] Monitor de Cotação em Tempo Real (`monitor_cotacao.json`)
 Automação que consome uma **API Pública de Câmbio** (AwesomeAPI) para monitorar a cotação do Dólar (USD/BRL) em tempo real. O fluxo possui gatilhos condicionais que disparam alertas automáticos caso a moeda ultrapasse um teto pré-definido (regra de Compliance/Tesouraria).
 * **Competências:** HTTP Request (GET), Consumo de API, Tratamento de JSON, Monitoramento.
 
